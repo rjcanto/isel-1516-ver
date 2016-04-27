@@ -8,16 +8,14 @@ public class Completion {
 		notify();
 	}
 	
-	public boolean waitForCompletion()
+	public synchronized boolean waitForCompletion()
 	{
-		synchronized(this) {
-			try {
-				while(!isComplete) wait();
-				return false ;
-			} catch (InterruptedException e)
-			{
-				return false ;
-			}
+		try {
+			while(!isComplete) wait();
+			return false ;
+		} catch (InterruptedException e)
+		{
+			return false ;
 		}
 	}
 	
